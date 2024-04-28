@@ -10,7 +10,7 @@ const Signup = () => {
   })
   const [users,setUsers]=useState([])
   useEffect(()=>{
-      axios.get("http://localhost:4001/users").then(set=>setUsers(set.data))
+      axios.get("https://forgot-password-1-053b.onrender.com/users").then(set=>setUsers(set.data))
   },[])
 
   const handleChange=(event)=>{
@@ -28,7 +28,7 @@ const handleNewUser=async(event)=>{
   const hashPassword=await bcryptjs.hash(userForm.password,0)
   if(!user1.length){
   if(userForm.username&&userForm.email&&userForm.password)
-  axios.post("http://localhost:4001/createUser",{
+  axios.post("https://forgot-password-1-053b.onrender.com/createUser",{
   username:userForm.username,
   email:userForm.email,
   password:hashPassword

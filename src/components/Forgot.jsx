@@ -20,7 +20,7 @@ const [userExist,setUserExist]=useState(false)
 
     const [users,setUsers]=useState([])
     useEffect(()=>{
-        axios.get("http://localhost:4001/users").then(set=>setUsers(set.data))
+        axios.get("https://forgot-password-1-053b.onrender.com/users").then(set=>setUsers(set.data))
     },[])
 
     const handleChange=(event)=>{
@@ -52,7 +52,7 @@ const [userExist,setUserExist]=useState(false)
     const handleExistUser=async (event)=>{
         event.preventDefault();
         const randomString=await Math.floor(Math.random()*10000)
-       await axios.post("http://localhost:4001/forgotPassword",{
+       await axios.post("https://forgot-password-1-053b.onrender.com/forgotPassword",{
             ...name,
             randomString:`${randomString}`,
             id:`${otpId}`,
@@ -62,7 +62,7 @@ const [userExist,setUserExist]=useState(false)
        
         setUserExist(!userExist)
         setHide(!hide)
-        await axios.get("http://localhost:4001/verifyOtp").then((dbres)=>setFpData(dbres.data))
+        await axios.get("https://forgot-password-1-053b.onrender.com/verifyOtp").then((dbres)=>setFpData(dbres.data))
         console.log(fpData)
 
        /* axios.post("http://localhost:4001/sendMail",{
@@ -80,7 +80,7 @@ const [userExist,setUserExist]=useState(false)
 
     const verifyOtp=async(event)=>{
         event.preventDefault();
-        await axios.get("http://localhost:4001/verifyOtp").then((dbres)=>setFpData(dbres.data))
+        await axios.get("https://forgot-password-1-053b.onrender.com/verifyOtp").then((dbres)=>setFpData(dbres.data))
         console.log(fpData)
        const fp= fpData.filter(user=>user.id==otpId)
        console.log(fp[0])
@@ -101,7 +101,7 @@ const [userExist,setUserExist]=useState(false)
         const fp=await fpData.filter(user=>user.id==otpId)
         console.log(fpData)
         const hashPassword=await bcryptjs.hash(event.target.value,0)
-        await axios.patch("http://localhost:4001/changePassword",{
+        await axios.patch("https://forgot-password-1-053b.onrender.com/changePassword",{
             username:fp[0].username,
             password:hashPassword
         }).then(()=>alert('password changed successfully!!!'))
