@@ -45,7 +45,12 @@ const router=createBrowserRouter([
   {
     path:'/all',
     element:<All />
-  }
+  },
+  {
+    path:'/forgotPassword',
+    element:<Forgot />
+  },
+  
 
 ])
 const App = () => {
